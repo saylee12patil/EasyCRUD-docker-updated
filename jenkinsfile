@@ -4,19 +4,19 @@ pipeline {
     stages {
         stage('Clone Repo') {
             steps {
-                git url: "https://github.com/Rohit-1920/EasyCRUD-docker-updated.git", branch: "main"
+                git url: "https://"https://github.com/saylee12patil/EasyCRUD-docker-updated", branch: "main"
             }
         }
 
         stage('Build Frontend Image') {
             steps {
-                sh "docker build -t r123mahajan/easycrud1-jenkins:frontend ./frontend"
+                sh "docker build -t saylee12patil/easycrud1-jenkins:frontend ./frontend"
             }
         }
 
         stage('Build Backend Image') {
             steps {
-                sh "docker build --no-cache -t r123mahajan/easycrud1-jenkins:backend ./backend"
+                sh "docker build --no-cache -t saylee12patil/easycrud1-jenkins:backend ./backend"
             }
         }
 
@@ -30,13 +30,13 @@ pipeline {
 
         stage('Push Frontend Image to Docker Hub') {
             steps {
-                sh "docker push r123mahajan/easycrud1-jenkins:frontend"
+                sh "docker push saylee12patil/easycrud1-jenkins:frontend"
             }
         }
 
         stage('Push Backend Image to Docker Hub') {
             steps {
-                sh "docker push r123mahajan/easycrud1-jenkins:backend"
+                sh "docker push saylee12patil/easycrud1-jenkins:backend"
             }
         }
 
@@ -44,7 +44,7 @@ pipeline {
             steps {
                 sh '''
                     docker rm -f easycrud1-frontend || true
-                    docker run -d --name easycrud1-frontend -p 80:80 r123mahajan/easycrud1-jenkins:frontend
+                    docker run -d --name easycrud1-frontend -p 80:80 saylee12patil/easycrud1-jenkins:frontend
                 '''
             }
         }
@@ -53,7 +53,7 @@ pipeline {
             steps {
                 sh '''
                     docker rm -f easycrud1-backend || true
-                    docker run -d --name easycrud1-backend -p 8081:8081 r123mahajan/easycrud1-jenkins:backend
+                    docker run -d --name easycrud1-backend -p 8081:8081 saylee12patil/easycrud1-jenkins:backend
                 '''
             }
         }
